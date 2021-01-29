@@ -8,7 +8,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class SuccessScenarioTest {
+public class FailedScenario3Test {
 
   private WebDriver driver;
 
@@ -28,18 +28,19 @@ public class SuccessScenarioTest {
   }
 
   /**
-   * Testing success scenario
+   * Testing failed scenario: wrong interest input
    */
   @Test
-  public void successScenario() {
+  public void failedScenario3Test() {
     driver.get("http://itsovy.sk/testing/");
-    driver.manage().window().setSize(new Dimension(669, 694));
+    driver.manage().window().setSize(new Dimension(669, 695));
     driver.findElement(By.id("amount")).click();
-    driver.findElement(By.id("amount")).sendKeys("3500");
+    driver.findElement(By.id("amount")).sendKeys("0");
     driver.findElement(By.id("interest")).click();
-    driver.findElement(By.id("interest")).sendKeys("3");
-    driver.findElement(By.id("period")).sendKeys("3");
+    driver.findElement(By.id("interest")).sendKeys("-5");
+    driver.findElement(By.id("period")).sendKeys("5");
     driver.findElement(By.id("period")).click();
+    driver.findElement(By.cssSelector("input:nth-child(3)")).click();
     driver.findElement(By.id("confirm")).click();
     driver.findElement(By.id("btnsubmit")).click();
   }
