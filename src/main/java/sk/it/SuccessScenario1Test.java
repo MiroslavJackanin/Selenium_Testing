@@ -4,10 +4,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class ResetScenarioTest {
+public class SuccessScenario1Test {
+
   private WebDriver driver;
 
   @Before
@@ -15,7 +18,6 @@ public class ResetScenarioTest {
     System.setProperty("webdriver.gecko.driver", "D:\\__SCHOOL\\SKOLA2\\geckodriver.exe");
     driver = new FirefoxDriver();
   }
-
   @After
   public void tearDown() {
     try {
@@ -27,24 +29,27 @@ public class ResetScenarioTest {
   }
 
   /**
-   * Testing reset
+   * Testing success scenario
    */
   @Test
-  public void resetScenarioTest() {
+  public void successScenario() {
     driver.get("http://itsovy.sk/testing/");
-    driver.manage().window().setSize(new Dimension(669, 696));
+    driver.manage().window().setSize(new Dimension(669, 694));
     driver.findElement(By.id("amount")).click();
-    driver.findElement(By.id("amount")).sendKeys("456");
+    driver.findElement(By.id("amount")).sendKeys("3500");
     driver.findElement(By.id("interest")).click();
     driver.findElement(By.id("interest")).sendKeys("3");
     driver.findElement(By.id("period")).sendKeys("3");
     driver.findElement(By.id("period")).click();
     driver.findElement(By.id("confirm")).click();
     driver.findElement(By.id("btnsubmit")).click();
-    driver.findElement(By.id("btnreset")).click();
 
-    Assert.assertEquals(driver.findElement(By.id("amount")).getText(), "");
-    Assert.assertEquals(driver.findElement(By.id("interest")).getText(), "");
-    Assert.assertEquals(driver.findElement(By.id("period")).getAttribute("value"), "1");
+    String result = driver.findElement(By.id("result")).getText();
+
+    Assert.assertEquals(result, getResult());
+  }
+
+  private String getResult() {
+    return "Total amount : 3758.10 , net profit : 258.10";
   }
 }

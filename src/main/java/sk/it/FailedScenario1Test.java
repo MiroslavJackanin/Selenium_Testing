@@ -1,6 +1,7 @@
 package sk.it;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -14,7 +15,7 @@ public class FailedScenario1Test {
 
   @Before
   public void setUp() {
-    System.setProperty("webdriver.gecko.driver", "C:\\Users\\MIRO\\Desktop\\SKOLA2\\geckodriver.exe");
+    System.setProperty("webdriver.gecko.driver", "D:\\__SCHOOL\\SKOLA2\\geckodriver.exe");
     driver = new FirefoxDriver();
   }
   @After
@@ -42,5 +43,9 @@ public class FailedScenario1Test {
     driver.findElement(By.id("period")).click();
     driver.findElement(By.cssSelector("input:nth-child(3)")).click();
     driver.findElement(By.id("btnsubmit")).click();
+
+    Assert.assertFalse(driver.findElement(By.id("result")).isDisplayed());
+    Assert.assertTrue(driver.findElement(By.id("error")).isDisplayed());
+    Assert.assertEquals(driver.findElement(By.id("error")).getText(), "You must agree to the processing !");
   }
 }
